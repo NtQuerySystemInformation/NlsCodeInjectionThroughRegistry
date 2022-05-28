@@ -2,6 +2,7 @@
  Inject code injection through Registry 
 # How does it work?
 It is based on jonas lykk discovery here: https://twitter.com/jonaslyk/status/1352729173631135751?lang=en
+
 There is two ways to accomplish this: 
 Either call SetThreadLocale and set up an export function named NlsDllCodePageTranslation, where your main payload is in.
 Or the second method, which is actually implemented here, it is possible to execute using functions such as SetConsoleCp  or SetConsoleOutputCP, you dont care about exports at all.
