@@ -1,5 +1,5 @@
 # NlsCodeInjectionThroughRegistry
-Code injection through registry modification.
+Dll injection through registry modification.
 It requieres administrator privileges, but it definetely works.
  
 # How does it work?
@@ -11,7 +11,7 @@ Or the second method, which is actually implemented here, it is possible to exec
 
 If the process is not console based, you can allocate one with AllocConsole, payload will still get triggered.
 
-For this reason, to make it to work, I had to create position independent shellcode and inject it to a remote process.
+For this reason, to make it to work, I had to create position independent shellcode and inject it to a remote process, which works as a stager to the actual loading of the dll.
 This is just meant for demostration purposes.
 
 One day in the future I will reverse a little bit better how this works, if i have time.
