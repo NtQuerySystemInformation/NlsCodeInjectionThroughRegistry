@@ -15,3 +15,9 @@ For this reason, to make it to work, I had to create position independent shellc
 This is just meant for demostration purposes.
 
 One day in the future I will reverse a little bit better how this works, if i have time.
+
+# How to use?
+Compile the project in release x64, it uses the default jonas payload, which spawns a shell when loaded.
+ShellcodeInjection is just an additional project I used to convert C to shellcode, using hasherezade method described here:
+https://github.com/vxunderground/VXUG-Papers/blob/main/From%20a%20C%20project%20through%20assembly%20to%20shellcode.pdf
+
