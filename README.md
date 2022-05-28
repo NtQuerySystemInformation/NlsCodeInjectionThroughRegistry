@@ -21,3 +21,4 @@ Compile the project in release x64, it uses the default jonas payload, which spa
 ShellcodeInjection is just an additional project I used to convert C to shellcode, using hasherezade method described here:
 https://github.com/vxunderground/VXUG-Papers/blob/main/From%20a%20C%20project%20through%20assembly%20to%20shellcode.pdf
 
+Only x64, tested in Windows 11.
