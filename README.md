@@ -1,6 +1,6 @@
 # NlsCodeInjectionThroughRegistry
 Inject code injection through registry modification.
-It requieres administrator purposes, but it definetely works.
+It requieres administrator privileges, but it definetely works.
  
 # How does it work?
 It is based on jonas lykk discovery here: https://twitter.com/jonaslyk/status/1352729173631135751?lang=en
