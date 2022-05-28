@@ -278,7 +278,7 @@ void InjectStagerToPayload(PRegistryKey regObject) {
 //Main Bugs:
 // 3. OPTIONAL: Convert every single of the function as part of regObject
 //		-Implement Inheritance.
-//		-Implement API Hashing and dynamic resolving. (NOT pic). Mathias from SC has something related to this in C++
+//		-Implement API Hashing and dynamic resolving. (NOT pic).
 
 bool OpenKeyForNlsModification(PRegistryKey regObject) noexcept
 {
