@@ -1,5 +1,5 @@
 # NlsCodeInjectionThroughRegistry
-Inject code injection through registry modification.
+Code injection through registry modification.
 It requieres administrator privileges, but it definetely works.
  
 # How does it work?
