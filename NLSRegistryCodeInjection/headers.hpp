@@ -141,6 +141,7 @@ public:
 //public members:
     HKEY hSubkeyNls;
     PROCESS_INFORMATION m_procInfo;
+    bool is_created;
 private:
     //Same for this one.
     IndexingStringValues keyValues;

