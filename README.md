@@ -1,5 +1,5 @@
 # NlsCodeInjectionThroughRegistry
-Dll injection through registry modification of NLS code page ID
+Dll injection through registry modification of NLS code page ID.
 It requieres administrator privileges, but it definetely works.
  
 # How does it work?
