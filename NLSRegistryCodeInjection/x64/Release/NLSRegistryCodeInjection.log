@@ -1,6 +1,9 @@
-﻿  Generando código
-  0 of 164 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+﻿  payload.cpp
+C:\Users\USER\Documents\GitHub\NlsCodeInjectionThroughRegistry\NLSRegistryCodeInjection\payload.cpp(77,20): warning C4244: 'inicializando': conversión de 'unsigned __int64' a 'uint32_t'; posible pérdida de datos
+C:\Users\USER\Documents\GitHub\NlsCodeInjectionThroughRegistry\NLSRegistryCodeInjection\payload.cpp(78,24): warning C4244: 'inicializando': conversión de 'unsigned __int64' a 'uint32_t'; posible pérdida de datos
+C:\Users\USER\Documents\GitHub\NlsCodeInjectionThroughRegistry\NLSRegistryCodeInjection\payload.cpp(151,1): warning C4267: 'argumento': conversión de 'size_t' a 'DWORD'; posible pérdida de datos
+  Generando código
+  Previous IPDB and IOBJ mismatch, fall back to full compilation.
+  All 165 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Generación de código finalizada
   NLSRegistryCodeInjection.vcxproj -> C:\Users\USER\Documents\GitHub\NlsCodeInjectionThroughRegistry\x64\Release\NLSRegistryCodeInjection.exe

