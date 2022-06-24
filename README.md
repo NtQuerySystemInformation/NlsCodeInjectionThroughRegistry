@@ -15,7 +15,7 @@ If the process is not console based, you can allocate one with AllocConsole, pay
 For this reason, to make it to work, I had to create position independent shellcode and inject it to a remote process, which works as a stager to the actual loading of the dll.
 This is just meant for demostration purposes.
 
-One day in the future I will reverse a little bit better how this works, if i have time.
+The reason why it works is explained in this tweet: https://twitter.com/kasua02/status/1540188814748123139?s=20&t=ReSAyq3QWyNufcam8TVZNg
 
 # How to use?
 Compile the project in release x64, it uses the default jonas payload, which spawns a shell when loaded.
