@@ -6,7 +6,8 @@ It requieres administrator privileges, but it definetely works.
 # How does it work?
 It is based on jonas lykk discovery here: https://twitter.com/jonaslyk/status/1352729173631135751?lang=en
 
-Here I used functions such as SetConsoleCp  or SetConsoleOutputCP, you dont care about exports at all.
+What I did is looking around the binaries related, from where I found SetConsoleCp/SetConsoleOutputCP
+are the main parts involved in the dll loading, you dont care about exports at all.
 
 If the process is not console based, you can allocate one with AllocConsole, payload will still get triggered.
 
